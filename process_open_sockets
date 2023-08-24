@@ -1,0 +1,13 @@
+table_name("process_open_sockets")
+description("Network activity. List all connections made to or from a process, excluding connections to localhost and RFC1918 IP addresses.")
+schema([
+    Column("local_port", INTEGER, "Socket local port"),
+    Column("remote_port", INTEGER, "Socket remote port"),
+    Column("remote_address", TEXT, "Socket remote address"),
+    Column("pid", BIGINT, "Process (or thread) ID", index=True),
+    Column("name", TEXT, "The process path or shorthand argv[0]"),
+    Column("path", TEXT, "Path to executed binary"),
+  
+examples([
+  "SELECT pos.local_port, pos.remote_port, pos.remote_address, p.pid, p.path FROM process_open_sockets pos JOIN processes p ON pos.pid = p.pid WHERE remote_address NOT LIKE '192.168%' AND remote_address NOT LIKE '10.%' AND remote_address NOT LIKE '172.16.%' AND remote_address NOT LIKE '127.%' AND remote_address!='0.0.0.0' AND remote_address NOT LIKE 'fe80%' AND remote_port!='0';",
+])
