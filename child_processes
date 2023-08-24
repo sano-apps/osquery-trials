@@ -1,0 +1,11 @@
+table_name("child_processes")
+description("Identify parent-child relationships between processes on Windows by matching parent process IDs (PPIDs) with corresponding child processes.")
+schema([
+    Column("parent_pid", BIGINT, "Parent process ID (PPID)"),
+    Column("parent_name", TEXT, "Parent process name"),
+    Column("child_pid", BIGINT, "Child process ID"),
+    Column("child_name", TEXT, "Child process name"),
+])
+examples([
+    "SELECT parent_pid, parent_name, child_pid, child_name FROM child_processes"
+])
