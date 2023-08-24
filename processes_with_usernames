@@ -1,0 +1,10 @@
+table_name("processes_with_usernames")
+description("Processes with usernames - fetch the username, instead of the uid for a given process.")
+schema([
+    Column("pid", BIGINT, "Process (or thread) ID", index=True),
+   Column("username", TEXT, "Username", additional=True),
+    Column("name", TEXT, "The process path or shorthand argv[0]"),
+
+examples([
+  "SELECT pid, username, name FROM processes p JOIN users u ON u.uid = p.uid ORDER BY start_time DESC LIMIT 5",
+])
