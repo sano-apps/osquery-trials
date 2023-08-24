@@ -1,0 +1,13 @@
+table_name("executables_listening_ports")
+description("List executables listening on network ports.")
+schema([
+    Column("port", INTEGER, "Transport layer port"),
+    Column("pid", INTEGER, "Process (or thread) ID"),
+	Column("name", TEXT, "The process path or shorthand argv[0]"),
+    Column("path", TEXT, "Path to executed binary"),
+])
+extended_schema(LINUX, [
+    Column("net_namespace", TEXT, "The inode number of the network namespace"),
+])
+attributes(cacheable=True)
+implementation("listening_ports@genListeningPorts")
