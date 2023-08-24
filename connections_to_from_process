@@ -1,4 +1,4 @@
-table_name("process_open_sockets")
+table_name("connections_to_from_process")
 description("Network activity. List all connections made to or from a process, excluding connections to localhost and RFC1918 IP addresses.")
 schema([
     Column("local_port", INTEGER, "Socket local port"),
